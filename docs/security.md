@@ -1,6 +1,6 @@
 # AttestDock security and privacy model
 
-Updated: 2026-11-09. This document defines required controls. It does not claim that controls listed as future work are already implemented.
+Updated: 2026-11-17. This document defines required controls. It does not claim that controls listed as future work are already implemented.
 
 ## Trust boundaries
 
@@ -32,7 +32,7 @@ Validate input, authenticate users, authorize ownership, limit request size, rat
 
 ## Current blockers
 
-The selected X account ownership template has a working local proof flow. A real extension proof returned `verified: true` on 2026-11-17 after server checks and Primus SDK signature verification. No tracked file contains Primus credential values. The system has no persistent database or production identity service. The local server uses wallet challenge signatures, an HttpOnly cookie, short-lived nonces, one-use sessions, and server-side claim checks. These in-memory controls are not a production proof system. The IP remediation report also records open copyright and branding decisions.
+The selected X account ownership template has a working local proof flow. A real extension proof returned `verified: true` on 2026-11-17 after server checks and Primus SDK signature verification. No tracked file contains Primus credential values. The system has no persistent database or production identity service. The local server uses wallet challenge signatures, an HttpOnly cookie, short-lived nonces, one-use sessions, and server-side claim checks. These in-memory controls are not a production proof system. Review third-party assets, release notices, and the public name before a release claim.
 
 ## Official references
 

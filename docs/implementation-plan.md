@@ -1,10 +1,10 @@
 # AttestDock implementation plan
 
-Updated: 2026-11-09. This plan follows the current Vite/React/TypeScript repository. It does not treat a mock result as a real proof.
+Updated: 2026-11-17. This plan follows the Vite/React/TypeScript repository. It does not treat a mock result as a real proof. Sections dated 2026-11-09 record the earlier development state.
 
 ## Phase 0: audit
 
-Complete the repository inventory, preserve the six-rule scanner, and record architecture and security limits. The present app has no backend, database, authentication, or live Primus integration. The existing IP remediation branch has uncommitted brand and notice changes. LICENSE is unchanged pending rights-holder confirmation.
+At the start of this work, the app had no backend, database, authentication, or live Primus integration. The repository audit preserved the six-rule scanner and recorded architecture and security limits. Later sections describe the current local X proof flow.
 
 ## Increment 1: shared domain and development fixture
 
@@ -32,7 +32,7 @@ Publish a typed internal SDK package after the API contract is stable. Add React
 
 ## Acceptance gates
 
-Run tests, type checking, lint when configured, and the production build after each increment. Test browser flows and privacy again before any release. A live integration gate requires valid credentials, a verified template, trusted verification, persistent storage, authentication, security review, and explicit release approval. Do not publish while the copyright holder and branding decisions in IP_REMEDIATION_REPORT.md remain open.
+Run tests, type checking, lint when configured, and the production build after each increment. Test browser flows and privacy again before any production release. The local X flow has valid development credentials, a selected template, and server verification. Production still needs persistent storage, stronger identity and project authorization, security review, and explicit deployment approval. Review third-party assets, notices, and the product name before a release claim.
 
 
 ## Development status on 2026-11-09
@@ -45,4 +45,4 @@ Phase 0 documents are complete. Increment 1 has shared contracts, candidate regi
 - My Proofs showed the verified X username and time for the signed-in wallet. Results remain in memory and are lost on restart.
 - The browser scanner remains separate and keeps source code on the device.
 - The server still rejects production startup. Durable storage, production identity, project-scoped consent, external Verification API, and release review remain open.
-- The copyright and brand questions in `IP_REMEDIATION_REPORT.md` still block publication.
+- Milad is the stated copyright holder. The repository uses the AttestDock name. Review third-party assets and release notices before a release claim.

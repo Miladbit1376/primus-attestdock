@@ -1,4 +1,6 @@
-# SafeShip platform QA
+# SafeShip platform QA (historical)
+
+This report records the 2026-11-09 development preview. See `README.md` and `docs/primus-integration.md` for the later AttestDock X proof result.
 
 Date: 2026-11-09. Scope: local ip-remediation branch. This report covers the new platform development preview. QA_REPORT.md remains the earlier scanner release record.
 

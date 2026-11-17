@@ -70,9 +70,9 @@ This is a heuristic single-file scan. It cannot follow imports, prove control fl
 
 ## Screenshots
 
-- [Desktop browser QA](screenshots/desktop.png)
-- [Mobile browser QA](screenshots/mobile.png)
-- [Tablet browser QA](screenshots/tablet.png)
+- [Desktop page preview](screenshots/desktop.png)
+- [Mobile page preview](screenshots/mobile.png)
+- [Tablet page preview](screenshots/tablet.png)
 
 See [QA_REPORT.md](QA_REPORT.md) for the earlier scanner checks and [PLATFORM_QA_REPORT.md](PLATFORM_QA_REPORT.md) for the new platform development checks.
 

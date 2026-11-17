@@ -1,6 +1,6 @@
 # Developer quickstart
 
-Updated: 2026-11-09. AttestDock has a loopback-only X account ownership flow. It is not deployed or production-ready.
+Updated: 2026-11-17. AttestDock has a loopback-only X account ownership flow. It is not deployed or production-ready.
 
 Use Node.js 24.12 or newer for the local TypeScript server. Use pnpm with the committed lockfile.
 

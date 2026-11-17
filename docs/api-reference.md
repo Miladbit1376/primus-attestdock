@@ -1,6 +1,6 @@
 # Local API reference
 
-Updated: 2026-11-09. This API binds to loopback and refuses normal production startup. The X proof path needs server-only `PRIMUS_APP_ID` and `PRIMUS_APP_SECRET` settings. It has no persistent account status.
+Updated: 2026-11-17. This API binds to loopback and refuses normal production startup. The X proof path needs server-only `PRIMUS_APP_ID` and `PRIMUS_APP_SECRET` settings. It has no persistent account status.
 
 | Route | Local behavior |
 | --- | --- |

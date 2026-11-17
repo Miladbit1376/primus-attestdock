@@ -1,6 +1,6 @@
 # AttestDock architecture
 
-Updated: 2026-11-09. Status: target design after the Phase 0 repository audit.
+Updated: 2026-11-17. The target design and current local implementation are marked separately below.
 
 ## Phase 0 baseline
 
