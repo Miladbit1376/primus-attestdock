@@ -102,3 +102,6 @@ Milad explicitly approved the commit, push to `ip-remediation`, and repository r
 The owner repeated the real X proof after the AttestDock rename. My Proofs showed a verified X username and time for the connected wallet. This confirms the local flow after the rename; the record still disappears when the local server restarts. No username, wallet address, cookie, or raw attestation is included in this report.
 
 Pull request #1 is a draft from `ip-remediation` into `main`. Its GitHub CI completed with success after a frozen pnpm install, 131 tests, TypeScript checks, and builds. The pull request has not been merged. Review release rights and the limitations in `docs/deployment.md` before merging or deploying.
+## Main branch update on 2026-11-17
+
+After the AttestDock source and CI passed review checks, pull request #1 was merged into `main` at commit `954f3b44307a7b4fce58dc88e3afd90f8ce62b54`. The public repository home page now shows the AttestDock README and source. GitHub CI also passed on the merge commit. This source merge did not deploy the local proof API. SDK redistribution terms, exact artifact notices, and production security gates remain open before a hosted release.
