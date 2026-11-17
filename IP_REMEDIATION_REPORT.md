@@ -93,3 +93,6 @@ The local build, TypeScript checks, and all 131 tests passed after the rename. T
 The three repository screenshots were captured again from the local AttestDock app at 1440, 768, and 390 pixel viewport widths. They show the new wordmark and no prior product name. These screenshots show the default page state; they are not a new scanner or proof test.
 
 Before a public release, review the name and assets, the exact release notices, and the production security gates in `docs/deployment.md`. No commit, push, repository rename, or deployment was made for this update.
+## GitHub update on 2026-11-17
+
+Milad explicitly approved the commit, push to `ip-remediation`, and repository rename. Commit `ad0637249e34426ae52ba88f0ad7a4aae2eb40fb` was pushed to that branch. The GitHub repository is now `Miladbit1376/primus-attestdock`, and the local `origin` uses the new URL. The default `main` branch still contains the earlier release. This branch remains a local-development implementation and is not a production deployment.
