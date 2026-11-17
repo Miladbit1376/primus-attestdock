@@ -1,8 +1,10 @@
 node_modules/
 dist/
+dist-server/
 .tmp/
 .pnpm-store/
 coverage/
 .env
 .env.*
 .envrc
+!.env.example

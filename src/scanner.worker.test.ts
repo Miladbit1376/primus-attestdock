@@ -14,7 +14,7 @@ describe('browser worker message path', () => {
     expect(workerScope.onmessage).toBeTypeOf('function')
     workerScope.onmessage!({ data: { code: "const appSecret = 'DEMO_ONLY';", environment: 'frontend', fileName: 'app.ts' } } as MessageEvent)
     expect(postMessage).toHaveBeenCalledOnce()
-    expect(postMessage.mock.calls[0][0].findings[0].id).toBe('PRIMUS-001')
+    expect(postMessage.mock.calls[0][0].findings[0].id).toBe('ATTESTDOCK-001')
     expect(fetch).not.toHaveBeenCalled()
   })
 })

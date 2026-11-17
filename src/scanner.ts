@@ -2,7 +2,7 @@ import ts from 'typescript'
 
 export type Environment = 'frontend' | 'backend' | 'unknown'
 export type Severity = 'high' | 'medium' | 'low'
-export type RuleId = 'PRIMUS-001' | 'PRIMUS-002' | 'PRIMUS-003' | 'PRIMUS-004' | 'PRIMUS-005' | 'PRIMUS-006'
+export type RuleId = 'ATTESTDOCK-001' | 'ATTESTDOCK-002' | 'ATTESTDOCK-003' | 'ATTESTDOCK-004' | 'ATTESTDOCK-005' | 'ATTESTDOCK-006'
 export type Finding = { id: RuleId; title: string; severity: Severity; line: number; evidence: string; explanation: string; fix: string; documentation: string }
 export type ScanReport = { fileName: string; environment: Environment; findings: Finding[]; error?: string }
 
@@ -12,9 +12,9 @@ const docs = {
   core: 'https://github.com/primus-labs/skills/blob/main/primus-zktls-core-sdk/references/usage-guide.md'
 }
 const names: Record<RuleId, string> = {
-  'PRIMUS-001': 'Exposed app secret', 'PRIMUS-002': 'Missing attestation verification',
-  'PRIMUS-003': 'Missing business logic validation', 'PRIMUS-004': 'Sensitive data logging',
-  'PRIMUS-005': 'Missing freshness validation', 'PRIMUS-006': 'Unchecked verification result'
+  'ATTESTDOCK-001': 'Exposed app secret', 'ATTESTDOCK-002': 'Missing attestation verification',
+  'ATTESTDOCK-003': 'Missing business logic validation', 'ATTESTDOCK-004': 'Sensitive data logging',
+  'ATTESTDOCK-005': 'Missing freshness validation', 'ATTESTDOCK-006': 'Unchecked verification result'
 }
 
 function nodeName(node: ts.Node): string {
@@ -60,24 +60,24 @@ export function scanCode(code: string, environment: Environment, fileName = 'sni
     const line = source.getLineAndCharacterOfPosition(node.getStart(source)).line + 1
     const raw = code.split(/\r?\n/)[line - 1]?.trim() ?? ''
     // Reports can be exported. Redact the code line to avoid copying secrets into reports.
-    const evidence = id === 'PRIMUS-001' ? 'Literal appSecret assignment (value redacted)' : raw.slice(0, 180)
+    const evidence = id === 'ATTESTDOCK-001' ? 'Literal appSecret assignment (value redacted)' : raw.slice(0, 180)
     if (!result.findings.some(item => item.id === id && item.line === line)) result.findings.push({ id, title: names[id], severity, line, evidence, explanation, fix, documentation })
   }
   const scopes: ts.Node[] = [source]
   walk(source, node => {
     if (ts.isFunctionLike(node) && 'body' in node && node.body) scopes.push(node)
     if (ts.isVariableDeclaration(node) && nodeName(node.name) === 'appSecret' && node.initializer && (ts.isStringLiteralLike(node.initializer) || ts.isNoSubstitutionTemplateLiteral(node.initializer))) {
-      if (environment !== 'backend') add('PRIMUS-001', environment === 'frontend' ? 'high' : 'medium', node, 'This file contains a literal appSecret. A client bundle can expose it.', 'Keep appSecret on the server. Sign requests on the server for extension integrations.', docs.extension)
+      if (environment !== 'backend') add('ATTESTDOCK-001', environment === 'frontend' ? 'high' : 'medium', node, 'This file contains a literal appSecret. A client bundle can expose it.', 'Keep appSecret on the server. Sign requests on the server for extension integrations.', docs.extension)
     }
     if (ts.isPropertyAssignment(node) && nodeName(node.name) === 'appSecret' && node.initializer && ts.isStringLiteralLike(node.initializer) && environment !== 'backend') {
-      add('PRIMUS-001', environment === 'frontend' ? 'high' : 'medium', node, 'This object contains a literal appSecret.', 'Keep appSecret on the server.', docs.extension)
+      add('ATTESTDOCK-001', environment === 'frontend' ? 'high' : 'medium', node, 'This object contains a literal appSecret.', 'Keep appSecret on the server.', docs.extension)
     }
     if (ts.isVariableDeclaration(node) && /^(VITE_|NEXT_PUBLIC_|REACT_APP_)/.test(nodeName(node.name)) && /SECRET|PRIVATE_KEY/i.test(nodeName(node.name))) {
-      add('PRIMUS-001', 'high', node, 'A public environment variable name indicates a secret may enter the client bundle.', 'Use a server-only environment variable for the app secret.', docs.extension)
+      add('ATTESTDOCK-001', 'high', node, 'A public environment variable name indicates a secret may enter the client bundle.', 'Use a server-only environment variable for the app secret.', docs.extension)
     }
     if (ts.isCallExpression(node) && ts.isPropertyAccessExpression(node.expression) && /^(log|info|debug|warn|error)$/.test(node.expression.name.text) && ts.isIdentifier(node.expression.expression) && node.expression.expression.text === 'console') {
       if (node.arguments.some(arg => contains(arg, child => ts.isIdentifier(child) && /^(appSecret|accessToken|authToken|apiKey|attestation)$/i.test(child.text)))) {
-        add('PRIMUS-004', 'medium', node, 'A console call includes a credential or full attestation object.', 'Remove the log or log only non-sensitive status fields.', docs.extension)
+        add('ATTESTDOCK-004', 'medium', node, 'A console call includes a credential or full attestation object.', 'Remove the log or log only non-sensitive status fields.', docs.extension)
       }
     }
   })
@@ -99,7 +99,7 @@ export function scanCode(code: string, environment: Environment, fileName = 'sni
     const hasAttestation = starts.length > 0 || contains(scope, node => ts.isIdentifier(node) && node.text === 'attestation')
     if (!hasAttestation) continue
     if (!verifies.length) {
-      add('PRIMUS-002', 'high', target, 'A decision uses an attestation, but this function has no visible verifyAttestation() call.', 'Verify the attestation before this decision. Review verification in other files too.', docs.verification)
+      add('ATTESTDOCK-002', 'high', target, 'A decision uses an attestation, but this function has no visible verifyAttestation() call.', 'Verify the attestation before this decision. Review verification in other files too.', docs.verification)
       continue
     }
     const verify = verifies[0]
@@ -113,13 +113,13 @@ export function scanCode(code: string, environment: Environment, fileName = 'sni
       return beforeSink && (negative ? stops(node.thenStatement) : sinkInsideThen || !!node.elseStatement && stops(node.elseStatement))
     })
     if (!guarded || verify.getStart(source) > target.getStart(source)) {
-      add('PRIMUS-006', 'high', target, 'The visible decision can proceed without a checked verification result.', 'Stop the decision when verifyAttestation() returns false.', docs.verification)
+      add('ATTESTDOCK-006', 'high', target, 'The visible decision can proceed without a checked verification result.', 'Stop the decision when verifyAttestation() returns false.', docs.verification)
     }
     if (!checks.some(node => node.getStart(source) < target.getStart(source))) {
-      add('PRIMUS-003', 'medium', target, 'No check of attestation data, source, or expected conditions is visible before this decision.', 'Compare the relevant attestation fields with your expected source and business policy.', docs.verification)
+      add('ATTESTDOCK-003', 'medium', target, 'No check of attestation data, source, or expected conditions is visible before this decision.', 'Compare the relevant attestation fields with your expected source and business policy.', docs.verification)
     }
     const freshness = contains(scope, node => ts.isBinaryExpression(node) && node.getStart(source) < target.getStart(source) && [ts.SyntaxKind.LessThanToken, ts.SyntaxKind.GreaterThanToken, ts.SyntaxKind.LessThanEqualsToken, ts.SyntaxKind.GreaterThanEqualsToken].includes(node.operatorToken.kind) && contains(node, child => ts.isPropertyAccessExpression(child) && child.name.text === 'timestamp'))
-    if (!freshness) add('PRIMUS-005', 'medium', target, 'No timestamp comparison is visible before this decision.', 'Set and enforce a freshness window that fits your application.', docs.verification)
+    if (!freshness) add('ATTESTDOCK-005', 'medium', target, 'No timestamp comparison is visible before this decision.', 'Set and enforce a freshness window that fits your application.', docs.verification)
   }
   result.findings.sort((a, b) => a.line - b.line || a.id.localeCompare(b.id))
   return result
