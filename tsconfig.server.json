@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": false,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "types": [
+      "node",
+      "vitest/globals"
+    ],
+    "rewriteRelativeImportExtensions": true,
+    "outDir": "dist-server",
+    "rootDir": "."
+  },
+  "include": [
+    "server",
+    "src/platform/**/*.ts"
+  ],
+  "exclude": [
+    "server/**/*.test.ts",
+    "src/platform/**/*.test.ts"
+  ]
+}
