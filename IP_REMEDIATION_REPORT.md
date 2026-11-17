@@ -96,3 +96,9 @@ Before a public release, review the name and assets, the exact release notices, 
 ## GitHub update on 2026-11-17
 
 Milad explicitly approved the commit, push to `ip-remediation`, and repository rename. Commit `ad0637249e34426ae52ba88f0ad7a4aae2eb40fb` was pushed to that branch. The GitHub repository is now `Miladbit1376/primus-attestdock`, and the local `origin` uses the new URL. The default `main` branch still contains the earlier release. This branch remains a local-development implementation and is not a production deployment.
+
+## Post-rename proof and CI update on 2026-11-17
+
+The owner repeated the real X proof after the AttestDock rename. My Proofs showed a verified X username and time for the connected wallet. This confirms the local flow after the rename; the record still disappears when the local server restarts. No username, wallet address, cookie, or raw attestation is included in this report.
+
+Pull request #1 is a draft from `ip-remediation` into `main`. Its GitHub CI completed with success after a frozen pnpm install, 131 tests, TypeScript checks, and builds. The pull request has not been merged. Review release rights and the limitations in `docs/deployment.md` before merging or deploying.

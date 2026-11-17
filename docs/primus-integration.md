@@ -1,6 +1,6 @@
 # Primus X account ownership integration
 
-Updated: 2026-11-17. The selected Primus Developer Hub template is `2e3160ae-8b1e-45e3-8c59-426366278b9d`. It discloses `screen_name`. A real local extension proof passed on 2026-11-17. The server returned `verified: true`. My Proofs then showed the verified X username and time for the same wallet. No tracked file contains App ID or App Secret values.
+Updated: 2026-11-17. The selected Primus Developer Hub template is `2e3160ae-8b1e-45e3-8c59-426366278b9d`. It discloses `screen_name`. A real local extension proof passed on 2026-11-17. The owner repeated the flow after the AttestDock rename. My Proofs showed the verified X username and time for the signed-in wallet. The server also logged SDK signature recovery. No tracked file contains App ID or App Secret values. The result is local and temporary.
 
 ## Selected template
 

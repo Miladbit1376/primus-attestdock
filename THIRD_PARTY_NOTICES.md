@@ -4,6 +4,12 @@ AttestDock is an independent community project. It scans JavaScript and TypeScri
 
 This file records verified license metadata and notices for the versions pinned in pnpm-lock.yaml on 2026-11-08. The source repository does not vendor node_modules or dist. A package's presence in the lockfile does not mean its code is present in every distributed artifact. Keep the required license and copyright text with any dependency code or asset that you distribute. Review a hosted build or downloadable archive separately before release.
 
+## Current dependency check (2026-11-17)
+
+`pnpm licenses list --json` reported 199 installed package entries on the Windows development host. It lists `@primuslabs/zktls-js-sdk` 0.3.15 and `text-encoding-utf-8` 1.0.2 as `Unknown`, and `rpc-websockets` 9.3.9 as `LGPL-3.0-only`. This command does not cover packages absent from this host or decide which code is included in a hosted build. The inventory below remains the earlier 146-entry audit and must not be read as a complete current inventory.
+
+The [official Primus SDK repository](https://github.com/primus-labs/zktls-js-sdk) currently shows no root license file, and its [package.json](https://github.com/primus-labs/zktls-js-sdk/blob/main/package.json) has no `license` field. Confirm the SDK redistribution terms with Primus Labs before hosting or distributing a build that includes it. Review the other unknown package and the LGPL package against the exact release artifact. This is a release check, not a conclusion that local development is forbidden.
+
 ## New Primus integration dependency review (2026-11-09)
 
 The local X integration adds `@primuslabs/zktls-js-sdk` 0.3.15 and `ethers` 5.7.2. The installed Primus SDK package has no `license` field and no bundled license file. The [official source repository](https://github.com/primus-labs/zktls-js-sdk) also shows no license file in its root listing. **Its redistribution permission is not verified. Do not publish a build that includes this SDK until Primus Labs confirms the applicable license or grants permission.** Public source availability and npm installation do not by themselves grant redistribution rights.
