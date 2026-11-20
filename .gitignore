@@ -1,6 +1,8 @@
 node_modules/
 dist/
 dist-server/
+dist-cli/
+public/assurance-report.json
 .tmp/
 .pnpm-store/
 coverage/

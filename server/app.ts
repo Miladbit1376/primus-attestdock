@@ -52,11 +52,11 @@ function checkRequest(request: IncomingMessage, requests: Map<string, { count: n
 
 async function staticFile(pathname: string, response: ServerResponse, directory: string): Promise<boolean> {
   const name = pathname === '/' ? 'index.html' : pathname.slice(1)
-  if (!['index.html', 'favicon.svg'].includes(name) && !/^assets\/[A-Za-z0-9_.-]+$/.test(name)) return false
+  if (!['index.html', 'favicon.svg', 'assurance-report.json'].includes(name) && !/^assets\/[A-Za-z0-9_.-]+$/.test(name)) return false
   try {
     const bytes = await readFile(join(directory, name))
     response.statusCode = 200
-    response.setHeader('Content-Type', name.endsWith('.html') ? 'text/html; charset=utf-8' : name.endsWith('.svg') ? 'image/svg+xml' : name.endsWith('.css') ? 'text/css; charset=utf-8' : 'text/javascript; charset=utf-8')
+    response.setHeader('Content-Type', name.endsWith('.html') ? 'text/html; charset=utf-8' : name.endsWith('.svg') ? 'image/svg+xml' : name.endsWith('.json') ? 'application/json; charset=utf-8' : name.endsWith('.css') ? 'text/css; charset=utf-8' : 'text/javascript; charset=utf-8')
     response.end(bytes)
     return true
   } catch { return false }
