@@ -118,12 +118,12 @@ export function PlatformPreview() {
   const [developerSection, setDeveloperSection] = useState<DeveloperSection>('Overview')
   return <div className="platform-shell">
     <section id="user-app" className="platform-section">
-      <div className="section-heading"><div><span className="overline">04 / USER APP</span><h2>Proofs with clear limits.</h2><p>Explore candidate claims. X account ownership is available when the local Primus service is configured.</p></div><span className="pending-badge">DEVELOPMENT PREVIEW</span></div>
+      <div className="section-heading"><div><span className="overline">05 / USER APP</span><h2>Proofs with clear limits.</h2><p>Explore candidate claims. X account ownership is available when the local Primus service is configured.</p></div><span className="pending-badge">DEVELOPMENT PREVIEW</span></div>
       <nav className="platform-nav" aria-label="User app sections">{userSections.map(section => <button key={section} type="button" aria-current={userSection === section ? 'page' : undefined} onClick={() => setUserSection(section)}>{section}</button>)}</nav>
       <UserView section={userSection} />
     </section>
     <section id="developer" className="platform-section">
-      <div className="section-heading"><div><span className="overline">05 / DEVELOPER PORTAL</span><h2>Build on one shared core.</h2><p>Review API and SDK work in progress. Production project tools are disabled.</p></div><span className="pending-badge">DEVELOPMENT PREVIEW</span></div>
+      <div className="section-heading"><div><span className="overline">06 / DEVELOPER PORTAL</span><h2>Build on one shared core.</h2><p>Review API and SDK work in progress. Production project tools are disabled.</p></div><span className="pending-badge">DEVELOPMENT PREVIEW</span></div>
       <nav className="platform-nav" aria-label="Developer portal sections">{developerSections.map(section => <button key={section} type="button" aria-current={developerSection === section ? 'page' : undefined} onClick={() => setDeveloperSection(section)}>{section}</button>)}</nav>
       <DeveloperView section={developerSection} />
     </section>

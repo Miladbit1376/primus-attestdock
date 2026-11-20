@@ -1,6 +1,6 @@
 # AttestDock
 
-AttestDock is an independent tool for Primus zkTLS account proofs and integration checks. Its local X flow verifies a wallet-linked `screen_name` with a server-checked attestation. Its browser scanner checks one JavaScript or TypeScript file for visible integration risks. AttestDock is a community project. It is not affiliated with or officially endorsed by Primus Labs.
+AttestDock is an independent tool for Primus zkTLS integration checks and account proofs. It scans JavaScript or TypeScript for visible integration risks and runs repeatable policy checks against its own X proof server path. Its local X flow verifies a wallet-linked `screen_name` with a server-checked attestation. AttestDock is a community project. It is not affiliated with or officially endorsed by Primus Labs.
 
 The pre-release SafeShip name and `SAFESHIP-*` scanner IDs changed to AttestDock and `ATTESTDOCK-*`. Existing exported JSON reports keep their old IDs. The private SDK package and local environment variable prefix also changed. No public SDK version was released under the old name.
 
@@ -10,6 +10,9 @@ The pre-release SafeShip name and `SAFESHIP-*` scanner IDs changed to AttestDock
 - Scans in a browser worker so the editor remains responsive.
 - Six security and integration rule categories.
 - File upload, environment selection, example snippets, line numbers, and JSON export.
+- A local CLI scans selected source files with the same six rules. CI blocks high-severity findings in selected production paths.
+- Ten synthetic policy cases exercise the X server decision path. The build publishes a sanitized report for the Assurance section.
+- A browser-only error helper explains a small set of documented Primus codes and prepares a support summary for review.
 - Browser scanner source stays local. The loopback platform API now has a local X account ownership flow with wallet sign-in and server verification. It has no production database or persistent account status.
 
 ## Run locally
@@ -21,7 +24,9 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open the URL printed by Vite. Run `pnpm test` for unit tests and `pnpm build` for a production build. Run `pnpm preview` to inspect the built site. If you run the project inside a parent pnpm workspace that does not include it, add `--ignore-workspace` to the install command.
+Open the URL printed by Vite. Run `pnpm test` for unit tests, `pnpm check:integration` for the source gate, `pnpm assurance` for X policy cases, and `pnpm build` for a production build. Run `pnpm preview` to inspect the built site. If you run the project inside a parent pnpm workspace that does not include it, add `--ignore-workspace` to the install command.
+
+The assurance suite uses a stubbed SDK signature result. It isolates application policy, including recipient, source, field, age, nonce, condition and replay checks. It does not claim a live Primus proof or third-party app review. The CLI scans files independently; it does not trace values across files. See [assurance checks](docs/assurance.md) for the test method and limits.
 
 On Windows PowerShell, use `pnpm.cmd` when the execution policy blocks `pnpm.ps1`. This does not require changing the system execution policy. Leave `NODE_ENV` unset when you run the production build.
 
@@ -68,6 +73,8 @@ The scanner performs static analysis only. It does not execute or upload submitt
 
 This is a heuristic single-file scan. It cannot follow imports, prove control flow across functions, confirm a verifier's implementation, check on-chain behavior, detect every secret, or certify a full application. It is not a complete security audit. A clean report does not prove that an application is secure.
 
+The assurance suite runs controlled inputs through AttestDock's X server path. The stubbed signature result lets the suite test application policy, but a synthetic acceptance is not evidence that the Primus SDK accepted a real signature. A separate local extension flow has been tested by the project owner. No live Primus credentials or raw attestation are used by CI.
+
 ## Screenshots
 
 - [Desktop page preview](screenshots/desktop.png)
@@ -78,4 +85,4 @@ See [QA_REPORT.md](QA_REPORT.md) for the earlier scanner checks and [PLATFORM_QA
 
 ## License
 
-MIT. The copyright holder notice needs human confirmation before publication. See THIRD_PARTY_NOTICES.md for dependency and asset notices.
+MIT. Milad is the stated copyright holder in LICENSE. Review third-party rights and the exact release notices before publication. See THIRD_PARTY_NOTICES.md for dependency and asset notices.
