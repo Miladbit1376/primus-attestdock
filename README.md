@@ -12,6 +12,7 @@ The pre-release SafeShip name and `SAFESHIP-*` scanner IDs changed to AttestDock
 - File upload, environment selection, example snippets, line numbers, and JSON export.
 - A local CLI scans selected source files with the same six rules. CI blocks high-severity findings in selected production paths.
 - Ten synthetic policy cases exercise the X server decision path. The build publishes a sanitized report for the Assurance section.
+- A local adapter runner tests an external app's decision function against ten synthetic cases. A safe and an unsafe sample show the expected results.
 - A browser-only error helper explains a small set of documented Primus codes and prepares a support summary for review.
 - Browser scanner source stays local. The loopback platform API now has a local X account ownership flow with wallet sign-in and server verification. It has no production database or persistent account status.
 
@@ -25,6 +26,8 @@ pnpm dev
 ```
 
 Open the URL printed by Vite. Run `pnpm test` for unit tests, `pnpm check:integration` for the source gate, `pnpm assurance` for X policy cases, and `pnpm build` for a production build. Run `pnpm preview` to inspect the built site. If you run the project inside a parent pnpm workspace that does not include it, add `--ignore-workspace` to the install command.
+
+Run `pnpm check:external:example` to test the sample external app. To connect your own app decision, follow the [external adapter guide](docs/external-adapter.md). This runs trusted local code with controlled inputs. It is separate from the local X proof and does not verify a genuine Primus signature.
 
 The assurance suite uses a stubbed SDK signature result. It isolates application policy, including recipient, source, field, age, nonce, condition and replay checks. It does not claim a live Primus proof or third-party app review. The CLI scans files independently; it does not trace values across files. See [assurance checks](docs/assurance.md) for the test method and limits.
 
