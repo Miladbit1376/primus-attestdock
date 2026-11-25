@@ -12,5 +12,5 @@
     "outDir": "dist-cli",
     "rootDir": "."
   },
-  "include": ["scripts/check.ts", "src/scanner.ts"]
+  "include": ["scripts/check.ts", "scripts/external-check.ts", "scripts/external-assurance.ts", "src/scanner.ts"]
 }

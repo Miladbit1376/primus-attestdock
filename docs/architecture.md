@@ -49,6 +49,10 @@ Session states are created, awaiting_user, awaiting_extension, generating, submi
 
 The X account ownership Template ID is selected. The local browser and server SDK flow passed a real extension proof on 2026-11-17. The server returned `verified: true` after its field checks and SDK signature check. No tracked file has an App ID or App Secret value. Local wallet sign-in and proof results use in-memory sessions. There is no production identity service, database, or durable verification record. See primus-integration.md and security.md.
 
+## Assurance layer
+
+The browser scanner checks one source file at a time. The source CLI uses the same rules for selected repository paths. The X assurance suite calls the local `PrimusXFlow` policy path with a stubbed SDK. The external adapter runner loads a trusted local ESM module and calls the app's own decision function with ten synthetic inputs. Its report records expected and observed decisions without raw inputs. The built site displays sanitized X and external sample reports. These checks do not replace a genuine signed Primus proof test.
+
 ## Sources
 
 - [Primus Enterprise SDK integration guide](https://github.com/primus-labs/skills/blob/main/primus-zktls-js-sdk-dapp/SKILL.md)

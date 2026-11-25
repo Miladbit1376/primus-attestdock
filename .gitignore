@@ -3,6 +3,7 @@ dist/
 dist-server/
 dist-cli/
 public/assurance-report.json
+public/external-demo-report.json
 .tmp/
 .pnpm-store/
 coverage/

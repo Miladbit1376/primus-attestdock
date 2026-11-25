@@ -52,7 +52,7 @@ function checkRequest(request: IncomingMessage, requests: Map<string, { count: n
 
 async function staticFile(pathname: string, response: ServerResponse, directory: string): Promise<boolean> {
   const name = pathname === '/' ? 'index.html' : pathname.slice(1)
-  if (!['index.html', 'favicon.svg', 'assurance-report.json'].includes(name) && !/^assets\/[A-Za-z0-9_.-]+$/.test(name)) return false
+  if (!['index.html', 'favicon.svg', 'assurance-report.json', 'external-demo-report.json'].includes(name) && !/^assets\/[A-Za-z0-9_.-]+$/.test(name)) return false
   try {
     const bytes = await readFile(join(directory, name))
     response.statusCode = 200

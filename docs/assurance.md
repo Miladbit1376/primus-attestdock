@@ -32,6 +32,6 @@ The public report contains case IDs, labels, expected and observed decisions, st
 
 The browser error helper maps a short list of published Primus codes to documented meanings. It prepares a text summary locally. Code `00104` alone cannot identify which verification requirement failed. The user must review the summary before sharing it. The helper does not upload inputs or inspect private proofs.
 
-## Next integration boundary
+## External app checks
 
-This first suite covers AttestDock's X server path. It does not run arbitrary third-party application code. A future project adapter can let a developer supply their own decision function and controlled verifier. That adapter must keep synthetic policy tests separate from genuine signed-reference checks and must not claim official Primus approval.
+The [external adapter runner](external-adapter.md) lets a developer connect a trusted local module to an app's decision function. It runs ten controlled cases and reports only decisions. This X suite still covers AttestDock's own server path. Both suites keep synthetic policy tests separate from genuine signed-reference checks. Neither suite claims official Primus approval.
