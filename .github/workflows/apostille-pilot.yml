@@ -1,0 +1,51 @@
+name: Apostille policy pilot
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/apostille-pilot.yml'
+      - 'pilots/apostille/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out AttestDock pilot
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check out pinned Apostille source
+        uses: actions/checkout@v4
+        with:
+          repository: moltaphet/apostille
+          ref: 03c98c48290fb8b82be43bd43de7af11ede6d5b3
+          path: external/apostille
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: external/apostille/contracts/package-lock.json
+      - name: Install pinned contract dependencies
+        working-directory: external/apostille/contracts
+        run: npm ci --no-audit --no-fund
+      - name: Add the AttestDock pilot test
+        run: cp pilots/apostille/AttestDockPilot.test.js external/apostille/contracts/test/AttestDockPilot.test.js
+      - name: Run policy pilot on a local EVM
+        working-directory: external/apostille/contracts
+        run: npx hardhat test test/AttestDockPilot.test.js
+        env:
+          ATTESTDOCK_PILOT_REPORT: attestdock-apostille-report.json
+      - name: Save sanitized policy report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apostille-policy-report
+          path: external/apostille/contracts/attestdock-apostille-report.json
+          if-no-files-found: ignore
