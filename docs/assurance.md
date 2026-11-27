@@ -35,3 +35,5 @@ The browser error helper maps a short list of published Primus codes to document
 ## External app checks
 
 The [external adapter runner](external-adapter.md) lets a developer connect a trusted local module to an app's decision function. It runs ten controlled cases and reports only decisions. This X suite still covers AttestDock's own server path. Both suites keep synthetic policy tests separate from genuine signed-reference checks. Neither suite claims official Primus approval.
+
+The [Apostille pilot](pilots/apostille.md) uses the upstream Solidity contract on a local Hardhat EVM. It shows how AttestDock can test a different execution environment. Its mock verifier isolates contract policy; it does not check a live Primus proof.
