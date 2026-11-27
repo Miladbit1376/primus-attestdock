@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "mode": "external-solidity-policy-pilot",
+  "project": "moltaphet/apostille",
+  "upstreamCommit": "03c98c48290fb8b82be43bd43de7af11ede6d5b3",
+  "evidenceRun": "https://github.com/Miladbit1376/primus-attestdock/actions/runs/45994610384",
+  "policyAssumption": "The documented Binance source uses GET with an empty request body.",
+  "method": "Hardhat local EVM with the upstream Apostille contract and MockPrimusZKTLS",
+  "checks": [
+    {
+      "id": "matching-get",
+      "expected": "allow",
+      "observed": "allow",
+      "status": "pass",
+      "note": "Baseline contract decision."
+    },
+    {
+      "id": "wrong-recipient",
+      "expected": "deny",
+      "observed": "deny",
+      "status": "pass",
+      "note": "The caller differs from the attestation recipient."
+    },
+    {
+      "id": "wrong-source",
+      "expected": "deny",
+      "observed": "deny",
+      "status": "pass",
+      "note": "The URL differs from the registered source."
+    },
+    {
+      "id": "invalid-signature-result",
+      "expected": "deny",
+      "observed": "deny",
+      "status": "pass",
+      "note": "The mock verifier rejects the attestation."
+    },
+    {
+      "id": "stale-proof",
+      "expected": "deny",
+      "observed": "deny",
+      "status": "pass",
+      "note": "The proof age exceeds the configured limit."
+    },
+    {
+      "id": "replayed-proof",
+      "expected": "deny",
+      "observed": "deny",
+      "status": "pass",
+      "note": "The same attestation is submitted twice."
+    },
+    {
+      "id": "different-method",
+      "expected": "deny",
+      "observed": "allow",
+      "status": "review",
+      "note": "The README describes a GET source. The contract should pin the method if GET is a policy requirement."
+    },
+    {
+      "id": "different-body",
+      "expected": "deny",
+      "observed": "allow",
+      "status": "review",
+      "note": "The README describes a GET source. A changed body may alter a server response if supported by that endpoint."
+    }
+  ],
+  "limits": [
+    "A mock verifier isolates contract policy. No genuine Primus signature was generated.",
+    "An accepted changed request does not prove that Binance returns a usable response for that request.",
+    "This is a read-only pilot. It does not change the upstream contract."
+  ]
+}

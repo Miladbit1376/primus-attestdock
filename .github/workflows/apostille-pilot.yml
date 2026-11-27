@@ -5,6 +5,9 @@ on:
     paths:
       - '.github/workflows/apostille-pilot.yml'
       - 'pilots/apostille/**'
+      - 'public/apostille-policy-report.json'
+      - 'src/assurance/ApostillePilotPanel.tsx'
+      - 'docs/pilots/apostille.md'
   workflow_dispatch:
 
 permissions:

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ApostillePilotPanel } from './ApostillePilotPanel.tsx'
 
 type Check = { id: string; label: string; expected: 'allow' | 'deny'; observed: 'allow' | 'deny' | 'error'; status: 'pass' | 'fail' }
 type AppReport = { summary: { passed: number; failed: number }; checks: Check[] }
@@ -37,5 +38,6 @@ export function ExternalAdapterPanel() {
     </>}
     <p className="external-limit">These are sample apps. The inputs and signature result are synthetic. Run a separate live Primus proof test for SDK compatibility.</p>
     <a className="external-guide" href="https://github.com/Miladbit1376/primus-attestdock/blob/main/docs/external-adapter.md" target="_blank" rel="noreferrer">Connect your app to these checks →</a>
+    <ApostillePilotPanel />
   </section>
 }
