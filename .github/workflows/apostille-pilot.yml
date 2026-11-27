@@ -36,7 +36,7 @@ jobs:
         working-directory: external/apostille/contracts
         run: npm ci --no-audit --no-fund
       - name: Add the AttestDock pilot test
-        run: cp pilots/apostille/AttestDockPilot.test.js external/apostille/contracts/test/AttestDockPilot.test.js
+        run: cp pilots/apostille/AttestDockPilot.hardhat.js external/apostille/contracts/test/AttestDockPilot.test.js
       - name: Run policy pilot on a local EVM
         working-directory: external/apostille/contracts
         run: npx hardhat test test/AttestDockPilot.test.js

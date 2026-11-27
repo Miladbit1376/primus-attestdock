@@ -55,7 +55,7 @@ async function observedSeal(contract, signer, proof) {
 }
 
 function record(id, expected, observed, note) {
-  checks.push({ id, expected, observed, status: expected === observed ? 'pass' : 'policy-gap', note })
+  checks.push({ id, expected, observed, status: expected === observed ? 'pass' : 'review', note })
 }
 
 describe('AttestDock read-only Apostille policy pilot', function () {
@@ -65,6 +65,8 @@ describe('AttestDock read-only Apostille policy pilot', function () {
       mode: 'external-solidity-policy-pilot',
       project: 'moltaphet/apostille',
       upstreamCommit: '03c98c48290fb8b82be43bd43de7af11ede6d5b3',
+      evidenceRun: process.env.GITHUB_RUN_ID ? `https://github.com/Miladbit1376/primus-attestdock/actions/runs/${process.env.GITHUB_RUN_ID}` : '',
+      policyAssumption: 'The documented Binance source uses GET with an empty request body.',
       method: 'Hardhat local EVM with the upstream Apostille contract and MockPrimusZKTLS',
       checks,
       limits: [
